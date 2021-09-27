@@ -1,8 +1,10 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import GoogleMobileAds
+import SystemConfiguration
 
-class NextViewController: UIViewController {
+class NextViewController: UIViewController, GADFullScreenContentDelegate {
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var damagerankLabel: UILabel!
@@ -22,6 +24,22 @@ class NextViewController: UIViewController {
     @IBOutlet weak var activeV: UIView!
     @IBOutlet weak var topPageButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!
+    //アクティブキャラのLabel
+    @IBOutlet weak var activeLevelLabel: UILabel!
+    @IBOutlet weak var activeLevelrankLabel: UILabel!
+    @IBOutlet weak var activeKillLabel: UILabel!
+    @IBOutlet weak var activeKillrankLabel: UILabel!
+    @IBOutlet weak var activeDamageLabel: UILabel!
+    @IBOutlet weak var activeDamagerankLabel: UILabel!
+//MARK:-Property
+
+    public var platform = ""
+    public var username = ""
+    
+    private let url = "https://public-api.tracker.gg/v2/apex/standard/profile/"
+    private let url2 = "APIKey"
+    //Ads
+    private var interstitial:GADInterstitialAd?
     //Topページに返すアクション
     @IBAction func topPage(_ sender: Any) {
         
@@ -37,22 +55,10 @@ class NextViewController: UIViewController {
         let finalViewController = storyBoard.instantiateViewController(withIdentifier: "final")as!FinalViewController
         self.present(finalViewController,animated: true,completion: nil)
     }
-    //アクティブキャラのLabel
-    @IBOutlet weak var activeLevelLabel: UILabel!
-    @IBOutlet weak var activeLevelrankLabel: UILabel!
-    @IBOutlet weak var activeKillLabel: UILabel!
-    @IBOutlet weak var activeKillrankLabel: UILabel!
-    @IBOutlet weak var activeDamageLabel: UILabel!
-    @IBOutlet weak var activeDamagerankLabel: UILabel!
-    
-    var platform = ""
-    var username = ""
-    let url = "https://public-api.tracker.gg/v2/apex/standard/profile/"
-    let url2 = "?TRN-Api-Key=a5281189-f169-4f7a-9a5d-803cfeb1aeff"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        HttpChange()
+
         shadow(name: self.userV)
         shadow(name: self.mainLabel)
         shadow(name: self.rankLabel)
@@ -60,12 +66,18 @@ class NextViewController: UIViewController {
         shadow(name: self.activeImageV)
         shadow(name: self.topPageButton)
         shadow(name: self.helpButton)
-
+        
+        HttpChange(completion: {[weak self]()->Void in
+            self?.loadInterstitial(completion: {[weak self]()->Void in
+                if self?.interstitial != nil{
+                    self?.interstitial?.present(fromRootViewController: self!)
+                }else{
+                    print("ad wasnt ready")
+                }
+            })
+        })
     }
-    
-    
-    
-    func shadow(name:UIView){
+    private func shadow(name:UIView){
         name.layer.cornerRadius = 5
         name.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         // 影の色
@@ -75,160 +87,168 @@ class NextViewController: UIViewController {
         // 影をぼかし
         name.layer.shadowRadius = 4
     }
-    
-    func HttpChange(){
-        print(platform)
-        
+    private func loadInterstitial(completion:@escaping()->Void){
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID: "ID", request: request, completionHandler: {[self]ad, error in
+            if let error = error{
+                print("could not load interstitial ad with eroor-\(error.localizedDescription)")
+                return
+            }
+            interstitial = ad
+            self.interstitial?.fullScreenContentDelegate = self
+            completion()
+        })
+    }
+    private func makeAlert(){
+        let alertControler = UIAlertController(title: "ユーザー情報が取得できませんでした。", message: "プラットフォームまたはユーザー名を確認し、再び実行して下さい。", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Top", style: .default, handler: {(action: UIAlertAction!) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                let storyboard: UIStoryboard = self.storyboard!
+                let nextView = storyboard.instantiateViewController(withIdentifier: "home")
+                nextView.modalPresentationStyle = .fullScreen
+                self.present(nextView, animated: true, completion: nil)
+                }
+            }
+        )
+        alertControler.addAction(okAction)
+        self.present(alertControler, animated: true)
+    }
+    private func returnPlatform(platform:String){
         if platform == "PC"{
-            platform = "origin"
+            self.platform = "origin"
         }
         if platform == "PS4"{
-            platform = "psn"
+            self.platform = "psn"
         }
         if platform == "XBOX"{
-            platform = "xbl"
+            self.platform = "xbl"
         }
+    }
+    
+    private func HttpChange(completion:@escaping()->Void){
+        returnPlatform(platform: platform)
         
         let nurl = url + platform + "/" + username + url2
-        print(nurl)
-
-        
         AF.request(nurl).responseJSON() { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 
                 if json["errors"][0]["code"] == "CollectorResultStatus::NotFound" {
-                    let alertControler = UIAlertController(title: "ユーザー情報が取得できませんでした。", message: "プラットフォームまたはユーザー名を確認し、再び実行して下さい。", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "Top", style: .default, handler: {(action: UIAlertAction!) in
-                        //アラートが消えるのと画面遷移が重ならないように0.5秒後に画面遷移するようにしてる
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        //0.5秒後に実行したい処理
-                            let storyboard: UIStoryboard = self.storyboard!
-                            let nextView = storyboard.instantiateViewController(withIdentifier: "home")
-                            nextView.modalPresentationStyle = .fullScreen
-                            self.present(nextView, animated: true, completion: nil)
-                            }
-                        }
-                    )
-                    alertControler.addAction(okAction)
-                    //アラートを表示する
-                    self.present(alertControler, animated: true)
+                    self.makeAlert()
                 }else{
-                
-                //アカウントイメージ取得
-                let acimage =  json["data"]["platformInfo"]["avatarUrl"].stringValue
-                let url = URL(string: acimage)
-                do {
-                      let data = try Data(contentsOf: url!)
-                      let image = UIImage(data: data)
-                    self.accountImageV.image = image
-
-                 }catch let err {
-                      print("Error : \(err.localizedDescription)")
-                 }
-                //ランクイメージ取得
-                
-                let rankimage =  json["data"]["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"].stringValue
-                let rankurl = URL(string: rankimage)
-                do {
-                      let data = try Data(contentsOf: rankurl!)
-                      let image = UIImage(data: data)
-                    self.rankImageV.image = image
-
-                 }catch let err {
-                      print("Error : \(err.localizedDescription)")
-                 }
-                //アクティブキャライメージ
-                
-                let activeimage =  json["data"]["segments"][1]["metadata"]["tallImageUrl"].stringValue
-                let activeurl = URL(string: activeimage)
                     
+                    //アカウントイメージ取得
+                    let acimage =  json["data"]["platformInfo"]["avatarUrl"].stringValue
+                    let url = URL(string: acimage)
+                    do {
+                          let data = try Data(contentsOf: url!)
+                          let image = UIImage(data: data)
+                        self.accountImageV.image = image
 
-                do {
-                    let data = try Data(contentsOf: activeurl!)
-                      let image = UIImage(data: data)
-                    self.activeImageV.image = image
-                    self.activeImageV.contentMode = .scaleAspectFit
+                     }catch let err {
+                          print("Error : \(err.localizedDescription)")
+                     }
+                    //ランクイメージ取得
+                    let rankimage =  json["data"]["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"].stringValue
+                    let rankurl = URL(string: rankimage)
+                    do {
+                          let data = try Data(contentsOf: rankurl!)
+                          let image = UIImage(data: data)
+                        self.rankImageV.image = image
 
-                 }catch let err {
-                      print("Error : \(err.localizedDescription)")
-                 }
+                     }catch let err {
+                          print("Error : \(err.localizedDescription)")
+                     }
+                    //アクティブキャライメージ
+                    
+                    let activeimage =  json["data"]["segments"][1]["metadata"]["tallImageUrl"].stringValue
+                    let activeurl = URL(string: activeimage)
+                        
 
-                var killnum: String = json["data"]["segments"][0]["stats"]["kills"]["displayValue"].stringValue
-                if killnum == "" {
-                    killnum = "unknown"
-                }
-                var killrank: String = json["data"]["segments"][0]["stats"]["kills"]["rank"].stringValue
-                var damage: String = json["data"]["segments"][0]["stats"]["damage"]["displayValue"].stringValue
-                if damage == ""{
-                    damage = "unknown"
-                }
-                var damagerank:String = json["data"]["segments"][0]["stats"]["damage"]["rank"].stringValue
-                let level: String = json["data"]["segments"][0]["stats"]["level"]["value"].stringValue
-                var levelrank: String = json["data"]["segments"][0]["stats"]["level"]["rank"].stringValue
+                    do {
+                        let data = try Data(contentsOf: activeurl!)
+                          let image = UIImage(data: data)
+                        self.activeImageV.image = image
+                        self.activeImageV.contentMode = .scaleAspectFit
+
+                     }catch let err {
+                          print("Error : \(err.localizedDescription)")
+                     }
+
+                    var killnum: String = json["data"]["segments"][0]["stats"]["kills"]["displayValue"].stringValue
+                    if killnum == "" {
+                        killnum = "unknown"
+                    }
+                    var killrank: String = json["data"]["segments"][0]["stats"]["kills"]["rank"].stringValue
+                    var damage: String = json["data"]["segments"][0]["stats"]["damage"]["displayValue"].stringValue
+                    if damage == ""{
+                        damage = "unknown"
+                    }
+                    var damagerank:String = json["data"]["segments"][0]["stats"]["damage"]["rank"].stringValue
+                    let level: String = json["data"]["segments"][0]["stats"]["level"]["value"].stringValue
+                    var levelrank: String = json["data"]["segments"][0]["stats"]["level"]["rank"].stringValue
+                    
+                    let rankname: String = json["data"]["segments"][0]["stats"]["rankScore"]["metadata"]["rankName"].stringValue
+                    
+                    let rankpoint: String = json["data"]["segments"][0]["stats"]["rankScore"]["displayValue"].stringValue
+                    
+                    //taking active score
+                    var akill: String = json["data"]["segments"][1]["stats"]["kills"]["displayValue"].stringValue
+                    var akillrank: String = json["data"]["segments"][1]["stats"]["kills"]["rank"].stringValue
+                    var adamage: String = json["data"]["segments"][1]["stats"]["damage"]["displayValue"].stringValue
+                    var adamagerank:String = json["data"]["segments"][1]["stats"]["damage"]["rank"].stringValue
+                    if akill == "" {
+                        akill = "unknown"
+                    }
+                    if adamage == ""{
+                        adamage = "unknown"
+                    }
+                    
+                    if levelrank != ""{
+                        levelrank = "#" + levelrank
+                    }else{
+                        levelrank = "　"
+                    }
+                    if killrank != ""{
+                        killrank = "#" + killrank
+                    }
+                    if damagerank != ""{
+                        damagerank = "#" + damagerank
+                    }
+                    if adamagerank != ""{
+                        adamagerank = "#" + adamagerank
+                    }else{
+                        adamagerank = "　"
+                    }
+                    if akillrank != ""{
+                        akillrank = "#" + akillrank
+                    }else{
+                        akillrank = "　"
+                    }
+                    
+                    self.killLabel.text = killnum
+                    self.damageLabel.text = damage
+                    self.usernameLabel.text = self.username
+                    self.levelLabel.text = level
+                    self.rankNameLabel.text = rankname
+                    self.rankPointLabel.text = "\(rankpoint) pt"
+                    self.levelrankLabel.text = levelrank
+                    self.killrankLabel.text = killrank
+                    self.damagerankLabel.text = damagerank
                 
-                let rankname: String = json["data"]["segments"][0]["stats"]["rankScore"]["metadata"]["rankName"].stringValue
-                
-                let rankpoint: String = json["data"]["segments"][0]["stats"]["rankScore"]["displayValue"].stringValue
-                
-                //taking active score
-                var akill: String = json["data"]["segments"][1]["stats"]["kills"]["displayValue"].stringValue
-                var akillrank: String = json["data"]["segments"][1]["stats"]["kills"]["rank"].stringValue
-                var adamage: String = json["data"]["segments"][1]["stats"]["damage"]["displayValue"].stringValue
-                var adamagerank:String = json["data"]["segments"][1]["stats"]["damage"]["rank"].stringValue
-                if akill == "" {
-                    akill = "unknown"
-                }
-                if adamage == ""{
-                    adamage = "unknown"
-                }
-                
-                if levelrank != ""{
-                    levelrank = "#" + levelrank
-                }else{
-                    levelrank = "　"
-                }
-                if killrank != ""{
-                    killrank = "#" + killrank
-                }
-                if damagerank != ""{
-                    damagerank = "#" + damagerank
-                }
-                if adamagerank != ""{
-                    adamagerank = "#" + adamagerank
-                }else{
-                    adamagerank = "　"
-                }
-                if akillrank != ""{
-                    akillrank = "#" + akillrank
-                }else{
-                    akillrank = "　"
-                }
-                
-                self.killLabel.text = killnum
-                self.damageLabel.text = damage
-                self.usernameLabel.text = self.username
-                self.levelLabel.text = level
-                self.rankNameLabel.text = rankname
-                self.rankPointLabel.text = "\(rankpoint) pt"
-                self.levelrankLabel.text = levelrank
-                self.killrankLabel.text = killrank
-                self.damagerankLabel.text = damagerank
-            
-                // push active score
-                self.activeKillLabel.text = akill
-                self.activeKillrankLabel.text = akillrank
-                self.activeLevelLabel.text = level
-                self.activeLevelrankLabel.text = levelrank
-                self.activeDamageLabel.text = adamage
-                self.activeDamagerankLabel.text = adamagerank
-            
+                    // push active score
+                    self.activeKillLabel.text = akill
+                    self.activeKillrankLabel.text = akillrank
+                    self.activeLevelLabel.text = level
+                    self.activeLevelrankLabel.text = levelrank
+                    self.activeDamageLabel.text = adamage
+                    self.activeDamagerankLabel.text = adamagerank
+                    completion()
                 }
             case .failure(let error):
                 print(error)
             }
-        
     }
- }
+  }
 }
