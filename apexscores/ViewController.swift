@@ -1,36 +1,34 @@
 import UIKit
-import Alamofire
-import SwiftyJSON
 import GoogleMobileAds
 
-class ViewController: UIViewController, UIPickerViewDelegate,UITextFieldDelegate{
+final class ViewController: UIViewController{
 
-//MARK:- IBOutlet
+//MARK: -IBOutlet
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var textV: UITextField!{didSet{textV.delegate = self}}
     @IBOutlet weak var origin: UIButton!
     @IBOutlet weak var psn: UIButton!
     @IBOutlet weak var xbox: UIButton!
-//MARK:-Property
-    private var platform = "PC"
+//MARK: -Property
+    private var platform:PFSort = .origin
 
-//MARK:- IBActionFunc
+//MARK: -IBActionFunc
     @IBAction func originButton(_ sender: Any) {
         ColorRechange()
         self.origin.tintColor = .systemBlue
-        self.platform = "PC"
+        self.platform = .origin
     }
     @IBAction func psnButton(_ sender: Any) {
         ColorRechange()
         self.psn.tintColor = .systemBlue
-        self.platform = "PS4"
+        self.platform = .ps4
     }
     @IBAction func xboxButton(_ sender: Any) {
         ColorRechange()
         self.xbox.tintColor = .systemBlue
-        self.platform = "XBOX"
+        self.platform = .xbox
     }
-//MARK:PrivateFunc
+//MARK: -Func
     private func ColorRechange (){
         origin.tintColor = .white
         psn.tintColor = .white
@@ -40,19 +38,7 @@ class ViewController: UIViewController, UIPickerViewDelegate,UITextFieldDelegate
     private func trim(string: String) -> String {
         return string.trimmingCharacters(in: .whitespaces)
     }
-    //テキストフィールドでリターンが押されたときに通知され起動するメソッド
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let username = trim(string: textV.text ?? "")
-        self.view.endEditing(true)
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier:"NextViewController" ) as! NextViewController
-        nextViewController.username = username
-        nextViewController.platform = self.platform
-        // 遷移先をFullScreenで表示する
-        nextViewController.modalPresentationStyle = .fullScreen
-        self.present(nextViewController,animated: true,completion: nil)
-        return true
-    }
+
     private func loadBannerAd() {
       let frame = { () -> CGRect in
         if #available(iOS 11.0, *) {
@@ -65,7 +51,7 @@ class ViewController: UIViewController, UIPickerViewDelegate,UITextFieldDelegate
       bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
       bannerView.load(GADRequest())
     }
-//MARK:-LyfeSycle
+//MARK: -LyfeSycle
     override func viewDidLoad() {
         super.viewDidLoad()
         bannerView.adUnitID = "UnitID"
@@ -85,3 +71,33 @@ class ViewController: UIViewController, UIPickerViewDelegate,UITextFieldDelegate
       })
     }
 }
+extension ViewController:UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let username = trim(string: textV.text ?? "")
+        self.view.endEditing(true)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier:"NextViewController" ) as! NextViewController
+        nextViewController.username = username
+        nextViewController.platform = self.platform
+        // 遷移先をFullScreenで表示する
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController,animated: true,completion: nil)
+        return true
+    }
+}
+
+
+
+/*
+ 
+ plataformにEnumを用いる
+ MVC採用
+ Viewの強化
+ 安全なアンラップ
+ ひらがなバグの修正
+ ファイル名変更
+ 
+ 
+ 
+ 
+ */
