@@ -10,7 +10,6 @@ final class ScoreAPI:NSObject{
     private let footer = "?TRN-Api-Key=a5281189-f169-4f7a-9a5d-803cfeb1aeff"
     
     func receiveApi(userData:String,completion:@escaping(ScoreModel)->Void){
-        print("RECEIVEAPI-------------------")
         let urlSt = header + userData + footer
         print(urlSt)
         AF.request(urlSt).responseJSON { response in

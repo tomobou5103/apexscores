@@ -7,6 +7,7 @@ target 'apexscores' do
 pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'Google-Mobile-Ads-SDK'
+pod 'HMSegmentedControl'
   # Pods for apexscores
 
 end

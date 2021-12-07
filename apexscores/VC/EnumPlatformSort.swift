@@ -20,14 +20,3 @@ enum PFSort {
         }
     }
 }
-
-
-//if platform == "PC"{
-//    self.platform = "origin"
-//}
-//if platform == "PS4"{
-//    self.platform = "psn"
-//}
-//if platform == "XBOX"{
-//    self.platform = "xbl"
-//}

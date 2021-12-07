@@ -1,14 +1,14 @@
 import UIKit
 import GoogleMobileAds
 
-final class ViewController: UIViewController{
+final class TopViewController: UIViewController{
 
 //MARK: -IBOutlet
-    @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var textV: UITextField!{didSet{textV.delegate = self}}
-    @IBOutlet weak var origin: UIButton!
-    @IBOutlet weak var psn: UIButton!
-    @IBOutlet weak var xbox: UIButton!
+    @IBOutlet private weak var bannerView: GADBannerView!
+    @IBOutlet private weak var textV: UITextField!{didSet{textV.delegate = self}}
+    @IBOutlet private weak var origin: UIButton!
+    @IBOutlet private weak var psn: UIButton!
+    @IBOutlet private weak var xbox: UIButton!
 //MARK: -Property
     private var platform:PFSort = .origin
 
@@ -71,12 +71,12 @@ final class ViewController: UIViewController{
       })
     }
 }
-extension ViewController:UITextFieldDelegate{
+extension TopViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let username = trim(string: textV.text ?? "")
         self.view.endEditing(true)
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier:"NextViewController" ) as! NextViewController
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier:"ScoreViewController" ) as! ScoreViewController
         nextViewController.username = username
         nextViewController.platform = self.platform
         // 遷移先をFullScreenで表示する
