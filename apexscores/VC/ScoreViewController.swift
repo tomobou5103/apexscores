@@ -12,7 +12,7 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
     @IBOutlet private weak var usernameLabel: UILabel!
     @IBOutlet private weak var userV: UIView!
     @IBOutlet private weak var accountImageV: UIImageView!
-//MARK: -ConfigureIBOutlet
+    //MARK: -ConfigureIBOutlet
     private func configureHMSegument(segment:HMSegmentedControl){
         segment.sectionTitles = ["Overview","Legends"]
         segment.backgroundColor = .darkGray
@@ -38,6 +38,7 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
         scroll.delegate = self
         scroll.isPagingEnabled = true
         scroll.showsHorizontalScrollIndicator = false
+        scroll.contentInsetAdjustmentBehavior = .always
     }
 //MARK: -Property
     internal var platform:PFSort?
@@ -72,12 +73,11 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
         ScoreAPI.shared.receiveApi(userData: userData, completion:{ model in
             DispatchQueue.main.async {
                 self.setText(model: model)
-                
             }
         })
     }
     private func setText(model:ScoreModel){
-        if model.error == ""{
+        if model.error.isEmpty{
             self.usernameLabel.text = self.username
             do{
                 guard
@@ -91,6 +91,9 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
                 print("could not load AccountImage")
             }
             overV.configure(model: model)
+            LegendsV.configure(model:model)
+        }else{
+            makeAlert()
         }
     }
     private func loadInterstitial(completion:@escaping()->Void){
@@ -109,26 +112,12 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
         let alertControler = UIAlertController(title: "ユーザー情報が取得できませんでした。", message: "プラットフォームまたはユーザー名を確認し、再び実行して下さい。", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Top", style: .default, handler: {(action: UIAlertAction!) in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                let storyboard: UIStoryboard = self.storyboard!
-                let nextView = storyboard.instantiateViewController(withIdentifier: "home")
-                nextView.modalPresentationStyle = .fullScreen
-                self.present(nextView, animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
                 }
             }
         )
         alertControler.addAction(okAction)
         self.present(alertControler, animated: true)
-    }
-    private func rankStRemake(string:String)->String{
-        let res = string == "" ? string : "#" + string
-        return res
-    }
-    private func unknownScore(score:String)->String{
-        if score == ""{
-            return "Set Tracker"
-        }else{
-            return score
-        }
     }
 }
 //MARK: -Extension

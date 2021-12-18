@@ -2,16 +2,19 @@ import UIKit
 import GoogleMobileAds
 
 final class TopViewController: UIViewController{
-
 //MARK: -IBOutlet
     @IBOutlet private weak var bannerView: GADBannerView!
     @IBOutlet private weak var textV: UITextField!{didSet{textV.delegate = self}}
     @IBOutlet private weak var origin: UIButton!
     @IBOutlet private weak var psn: UIButton!
     @IBOutlet private weak var xbox: UIButton!
+    @IBOutlet private weak var collectionV: UICollectionView!{didSet{configureCollectionV(c: collectionV)}}
 //MARK: -Property
     private var platform:PFSort = .origin
-
+    private var collectionCellId = "SaveTextCollectionViewCell"
+    private var backUserNames:[String] = []
+    private var udKey = "backUserNames"
+    private var segeueId = "Score"
 //MARK: -IBActionFunc
     @IBAction func originButton(_ sender: Any) {
         ColorRechange()
@@ -29,16 +32,22 @@ final class TopViewController: UIViewController{
         self.platform = .xbox
     }
 //MARK: -Func
+    private func configureCollectionV(c:UICollectionView){
+        
+        c.delegate = self
+        c.dataSource = self
+        c.register(UINib(nibName: collectionCellId, bundle: nil), forCellWithReuseIdentifier: collectionCellId)
+    }
+    private func ud(){
+        let value = UserDefaults.standard.stringArray(forKey: udKey)
+        self.backUserNames = value ?? []
+        collectionV.reloadData()
+    }
     private func ColorRechange (){
         origin.tintColor = .white
         psn.tintColor = .white
         xbox.tintColor = .white
     }
-    // 文字列の前後の空白を取り除く
-    private func trim(string: String) -> String {
-        return string.trimmingCharacters(in: .whitespaces)
-    }
-
     private func loadBannerAd() {
       let frame = { () -> CGRect in
         if #available(iOS 11.0, *) {
@@ -54,15 +63,16 @@ final class TopViewController: UIViewController{
 //MARK: -LyfeSycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        ud()
         bannerView.adUnitID = "UnitID"
         bannerView.rootViewController = self
         textV.clearButtonMode = .whileEditing
     }
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
-      loadBannerAd()
+        ud()
+        loadBannerAd()
     }
-
     override func viewWillTransition(to size: CGSize,
                             with coordinator: UIViewControllerTransitionCoordinator) {
       super.viewWillTransition(to:size, with:coordinator)
@@ -70,34 +80,58 @@ final class TopViewController: UIViewController{
         self.loadBannerAd()
       })
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let usernameText = self.textV.text else{return}
+        let trimSt = usernameText.remove(characterSet: .whitespaces)
+        self.backUserNames.insert(trimSt, at: 0)
+        UserDefaults.standard.set(self.backUserNames, forKey: udKey)
+        if segue.identifier == segeueId{
+            self.view.endEditing(true)
+            let nextVC = segue.destination as! ScoreViewController
+            nextVC.username = trimSt
+            nextVC.platform = platform
+        }
+    }
 }
 extension TopViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let username = trim(string: textV.text ?? "")
-        self.view.endEditing(true)
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier:"ScoreViewController" ) as! ScoreViewController
-        nextViewController.username = username
-        nextViewController.platform = self.platform
-        // 遷移先をFullScreenで表示する
-        nextViewController.modalPresentationStyle = .fullScreen
-        self.present(nextViewController,animated: true,completion: nil)
+        performSegue(withIdentifier: segeueId, sender: nil)
         return true
     }
 }
-
-
-
-/*
- 
- plataformにEnumを用いる
- MVC採用
- Viewの強化
- 安全なアンラップ
- ひらがなバグの修正
- ファイル名変更
- 
- 
- 
- 
- */
+extension TopViewController:UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.backUserNames.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard
+            let cell = collectionV.dequeueReusableCell(withReuseIdentifier: collectionCellId, for: indexPath) as? SaveTextCollectionViewCell
+        else{
+            return UICollectionViewCell()
+        }
+        cell.configure(index: indexPath.row, stringArray: self.backUserNames)
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.textV.text = backUserNames[indexPath.row]
+    }
+}
+extension TopViewController:UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height:CGFloat = collectionV.frame.height / 3
+        let width:CGFloat = collectionV.frame.width / 3
+        let size = CGSize(width: width, height: height)
+        return size
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+}
+private extension String{
+    func remove(characterSet:CharacterSet)->String{
+        return components(separatedBy: characterSet).joined()
+    }
+}

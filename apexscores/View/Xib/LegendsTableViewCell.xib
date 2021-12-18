@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LegendsTableViewCell" rowHeight="101" id="1Gn-Ut-YJB" customClass="LegendsTableViewCell" customModule="apexscores" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="101"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Gn-Ut-YJB" id="zAr-7b-KGc">
+                <rect key="frame" x="0.0" y="0.0" width="352" height="101"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkI-Wy-BjW">
+                        <rect key="frame" x="5" y="41.5" width="39" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAF-pG-GyJ">
+                        <rect key="frame" x="308" y="41.5" width="39" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="HAF-pG-GyJ" firstAttribute="centerY" secondItem="zAr-7b-KGc" secondAttribute="centerY" id="O4x-3R-WbE"/>
+                    <constraint firstItem="RkI-Wy-BjW" firstAttribute="centerY" secondItem="zAr-7b-KGc" secondAttribute="centerY" id="VR6-0b-uZS"/>
+                    <constraint firstItem="RkI-Wy-BjW" firstAttribute="leading" secondItem="zAr-7b-KGc" secondAttribute="leading" constant="5" id="og1-zx-DpC"/>
+                    <constraint firstAttribute="trailing" secondItem="HAF-pG-GyJ" secondAttribute="trailing" constant="5" id="yQI-AK-Qhz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="RkI-Wy-BjW" id="oPY-S2-hQR"/>
+                <outlet property="scoreLabel" destination="HAF-pG-GyJ" id="NfZ-hC-ws5"/>
+            </connections>
+            <point key="canvasLocation" x="86.956521739130437" y="39.84375"/>
+        </tableViewCell>
+    </objects>
+</document>
