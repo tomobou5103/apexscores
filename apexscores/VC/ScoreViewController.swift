@@ -49,7 +49,7 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
         super.viewDidLoad()
         shadow(name: self.userV)
         shadow(name: self.hmSegment)
-        HttpChange(completion: {[weak self]()->Void in
+        loadApi(completion: {[weak self]()->Void in
             self?.loadInterstitial(completion: {[weak self]()->Void in
                 if self?.interstitial != nil{
                     self?.interstitial?.present(fromRootViewController: self!)
@@ -67,23 +67,26 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
         name.layer.shadowOpacity = 0.6
         name.layer.shadowRadius = 4
     }
-    private func HttpChange(completion:@escaping()->Void){
+    private func loadApi(completion:@escaping()->Void){
         guard let platformSt = self.platform?.returnString()else{return}
         let userData = platformSt + "/" + username
         ScoreAPI.shared.receiveApi(userData: userData, completion:{ model in
             DispatchQueue.main.async {
-                self.setText(model: model)
+                if self.setText(model: model) == false{
+                    completion()
+                }
             }
         })
+        
     }
-    private func setText(model:ScoreModel){
+    private func setText(model:ScoreModel)->Bool{
         if model.error.isEmpty{
             self.usernameLabel.text = self.username
             do{
                 guard
                     let accountUrl = URL(string:model.accountImage)
                 else{
-                    return
+                    return false
                 }
                 let imageData = try Data(contentsOf: accountUrl)
                 self.accountImageV.image = UIImage(data: imageData)
@@ -92,8 +95,10 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
             }
             overV.configure(model: model)
             LegendsV.configure(model:model)
+            return true
         }else{
             makeAlert()
+            return false
         }
     }
     private func loadInterstitial(completion:@escaping()->Void){
