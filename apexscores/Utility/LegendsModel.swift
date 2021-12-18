@@ -17,7 +17,5 @@ struct LegendsModel{
             self.metadataDic["score\(count)"] = score
             count += 1
         }
-        print("LEGENDSMODELLEGENDSMODELLEGENDSMODELLEGENDSMODELLEGENDSMODELLEGENDSMODELLEGENDSMODELLEGENDSMODEL")
-        print(self)
     }
 }
