@@ -15,6 +15,7 @@ final class TopViewController: UIViewController{
     private var backUserNames:[String] = []
     private var udKey = "backUserNames"
     private var segeueId = "Score"
+    private let bannerUnitId = "ca-app-pub-9808916011504024/5668730667"
 //MARK: -IBActionFunc
     @IBAction func originButton(_ sender: Any) {
         ColorRechange()
@@ -64,7 +65,7 @@ final class TopViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         ud()
-        bannerView.adUnitID = "UnitID"
+        bannerView.adUnitID = bannerUnitId
         bannerView.rootViewController = self
         textV.clearButtonMode = .whileEditing
     }
@@ -84,6 +85,9 @@ final class TopViewController: UIViewController{
         guard let usernameText = self.textV.text else{return}
         let trimSt = usernameText.remove(characterSet: .whitespaces)
         self.backUserNames.insert(trimSt, at: 0)
+        if self.backUserNames.count > 15{
+            self.backUserNames.removeLast()
+        }
         UserDefaults.standard.set(self.backUserNames, forKey: udKey)
         if segue.identifier == segeueId{
             self.view.endEditing(true)
@@ -102,6 +106,7 @@ extension TopViewController:UITextFieldDelegate{
 extension TopViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.backUserNames.count
+        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
