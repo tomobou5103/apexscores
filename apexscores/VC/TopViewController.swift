@@ -15,7 +15,7 @@ final class TopViewController: UIViewController{
     private var backUserNames:[String] = []
     private var udKey = "backUserNames"
     private var segeueId = "Score"
-    private let bannerUnitId = ""
+    private let bannerUnitId = "ca-app-pub-9808916011504024/5668730667"
 //MARK: -IBActionFunc
     @IBAction func originButton(_ sender: Any) {
         ColorRechange()

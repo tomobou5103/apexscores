@@ -68,6 +68,11 @@ extension LegendsView:UITableViewDelegate,UITableViewDataSource{
         cell.configure(model: model, index: indexPath.row)
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tavleV.cellForRow(at: indexPath)
+        cell.configure(model: )
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 20
     }

@@ -50,7 +50,7 @@ final class ScoreViewController: UIViewController,GADFullScreenContentDelegate{
     internal var platform:PFSort?
     internal var username = ""
     private var interstitial:GADInterstitialAd?
-    private var interstitialUnitId = ""
+    private var interstitialUnitId = "ca-app-pub-9808916011504024/9583381053"
 //MARK: -LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
