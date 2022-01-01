@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D5DEA54249BA53F003EC103 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5DEA53249BA53F003EC103 /* AppDelegate.swift */; };
+		3D5DEA56249BA53F003EC103 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5DEA55249BA53F003EC103 /* SceneDelegate.swift */; };
+		3D5DEA5B249BA53F003EC103 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5DEA59249BA53F003EC103 /* Main.storyboard */; };
+		3D5DEA5D249BA543003EC103 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D5DEA5C249BA543003EC103 /* Assets.xcassets */; };
+		3D5DEA60249BA543003EC103 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5DEA5E249BA543003EC103 /* LaunchScreen.storyboard */; };
+		3FB4AF359697A5A40613CCE8 /* Pods_apexscores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBF64087FE2947D2A71DFE3 /* Pods_apexscores.framework */; };
+		7323878527575DFB00EA8008 /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7323878427575DFB00EA8008 /* OverView.swift */; };
+		7323878727575E1200EA8008 /* LegendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7323878627575E1200EA8008 /* LegendsView.swift */; };
+		7323878927575F9000EA8008 /* OverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7323878827575F9000EA8008 /* OverView.xib */; };
+		7323878B27575FB900EA8008 /* LegendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7323878A27575FB900EA8008 /* LegendsView.xib */; };
+		73238790275D665D00EA8008 /* apex0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7323878F275D665D00EA8008 /* apex0.mp4 */; };
+		732387D0275F5E9100EA8008 /* LegendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732387CF275F5E9000EA8008 /* LegendsTableViewCell.xib */; };
+		732387D2275F5ECA00EA8008 /* LegendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732387D1275F5ECA00EA8008 /* LegendsTableViewCell.swift */; };
+		732387D4275F6DE100EA8008 /* LegendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732387D3275F6DE100EA8008 /* LegendsModel.swift */; };
+		732387DF2762171B00EA8008 /* LegendsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732387DE2762171B00EA8008 /* LegendsHeaderView.swift */; };
+		732387E12762173800EA8008 /* LegendsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732387E02762173800EA8008 /* LegendsHeaderView.xib */; };
+		73267C342724BC4900434510 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73267C312724BC4900434510 /* ScoreViewController.swift */; };
+		73267C352724BC4900434510 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73267C322724BC4900434510 /* TopViewController.swift */; };
+		7332851E2733E7ED00C69DAF /* EnumPlatformSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7332851D2733E7ED00C69DAF /* EnumPlatformSort.swift */; };
+		73607FC3276A1A1D00FF832F /* apex3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FBA276A1A1C00FF832F /* apex3.mp4 */; };
+		73607FC4276A1A1D00FF832F /* apex1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FBB276A1A1C00FF832F /* apex1.mp4 */; };
+		73607FC5276A1A1D00FF832F /* apex4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FBC276A1A1C00FF832F /* apex4.mp4 */; };
+		73607FC6276A1A1D00FF832F /* apex6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FBD276A1A1D00FF832F /* apex6.mp4 */; };
+		73607FC7276A1A1D00FF832F /* apex7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FBE276A1A1D00FF832F /* apex7.mp4 */; };
+		73607FC8276A1A1D00FF832F /* apex8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FBF276A1A1D00FF832F /* apex8.mp4 */; };
+		73607FC9276A1A1D00FF832F /* apex5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FC0276A1A1D00FF832F /* apex5.mp4 */; };
+		73607FCA276A1A1D00FF832F /* apex2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FC1276A1A1D00FF832F /* apex2.mp4 */; };
+		73607FCB276A1A1D00FF832F /* apex9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73607FC2276A1A1D00FF832F /* apex9.mp4 */; };
+		73607FCE276A1EA200FF832F /* SaveTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73607FCC276A1EA200FF832F /* SaveTextCollectionViewCell.swift */; };
+		73607FCF276A1EA200FF832F /* SaveTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73607FCD276A1EA200FF832F /* SaveTextCollectionViewCell.xib */; };
+		736B713527443E9100D2C6C9 /* ScoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B713427443E9100D2C6C9 /* ScoreAPI.swift */; };
+		736B71392744435900D2C6C9 /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B71382744435900D2C6C9 /* ScoreModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		36A64B23172077FE49E342B5 /* Pods-apexscores.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apexscores.release.xcconfig"; path = "Target Support Files/Pods-apexscores/Pods-apexscores.release.xcconfig"; sourceTree = "<group>"; };
+		3D5DEA50249BA53F003EC103 /* apexscores.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = apexscores.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D5DEA53249BA53F003EC103 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3D5DEA55249BA53F003EC103 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3D5DEA5A249BA53F003EC103 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3D5DEA5C249BA543003EC103 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D5DEA5F249BA543003EC103 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3D5DEA61249BA543003EC103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7323878427575DFB00EA8008 /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		7323878627575E1200EA8008 /* LegendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendsView.swift; sourceTree = "<group>"; };
+		7323878827575F9000EA8008 /* OverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverView.xib; sourceTree = "<group>"; };
+		7323878A27575FB900EA8008 /* LegendsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegendsView.xib; sourceTree = "<group>"; };
+		7323878F275D665D00EA8008 /* apex0.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex0.mp4; sourceTree = "<group>"; };
+		732387CF275F5E9000EA8008 /* LegendsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegendsTableViewCell.xib; sourceTree = "<group>"; };
+		732387D1275F5ECA00EA8008 /* LegendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendsTableViewCell.swift; sourceTree = "<group>"; };
+		732387D3275F6DE100EA8008 /* LegendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendsModel.swift; sourceTree = "<group>"; };
+		732387DE2762171B00EA8008 /* LegendsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendsHeaderView.swift; sourceTree = "<group>"; };
+		732387E02762173800EA8008 /* LegendsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegendsHeaderView.xib; sourceTree = "<group>"; };
+		73267C312724BC4900434510 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		73267C322724BC4900434510 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		7332851D2733E7ED00C69DAF /* EnumPlatformSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumPlatformSort.swift; sourceTree = "<group>"; };
+		73607FBA276A1A1C00FF832F /* apex3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex3.mp4; sourceTree = "<group>"; };
+		73607FBB276A1A1C00FF832F /* apex1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex1.mp4; sourceTree = "<group>"; };
+		73607FBC276A1A1C00FF832F /* apex4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex4.mp4; sourceTree = "<group>"; };
+		73607FBD276A1A1D00FF832F /* apex6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex6.mp4; sourceTree = "<group>"; };
+		73607FBE276A1A1D00FF832F /* apex7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex7.mp4; sourceTree = "<group>"; };
+		73607FBF276A1A1D00FF832F /* apex8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex8.mp4; sourceTree = "<group>"; };
+		73607FC0276A1A1D00FF832F /* apex5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex5.mp4; sourceTree = "<group>"; };
+		73607FC1276A1A1D00FF832F /* apex2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex2.mp4; sourceTree = "<group>"; };
+		73607FC2276A1A1D00FF832F /* apex9.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apex9.mp4; sourceTree = "<group>"; };
+		73607FCC276A1EA200FF832F /* SaveTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		73607FCD276A1EA200FF832F /* SaveTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveTextCollectionViewCell.xib; sourceTree = "<group>"; };
+		736B713427443E9100D2C6C9 /* ScoreAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreAPI.swift; sourceTree = "<group>"; };
+		736B71382744435900D2C6C9 /* ScoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreModel.swift; path = apexscores/Utility/ScoreModel.swift; sourceTree = SOURCE_ROOT; };
+		B88474442AC12EDC971CCDD9 /* Pods-apexscores.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apexscores.debug.xcconfig"; path = "Target Support Files/Pods-apexscores/Pods-apexscores.debug.xcconfig"; sourceTree = "<group>"; };
+		CEBF64087FE2947D2A71DFE3 /* Pods_apexscores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apexscores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D5DEA4D249BA53F003EC103 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FB4AF359697A5A40613CCE8 /* Pods_apexscores.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3D5DEA47249BA53F003EC103 = {
+			isa = PBXGroup;
+			children = (
+				3D5DEA52249BA53F003EC103 /* apexscores */,
+				3D5DEA51249BA53F003EC103 /* Products */,
+				8D021DCF2DEA5FEC7A67764D /* Pods */,
+				462F6EBB1BBB2C48BC4F6E9A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3D5DEA51249BA53F003EC103 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D5DEA50249BA53F003EC103 /* apexscores.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3D5DEA52249BA53F003EC103 /* apexscores */ = {
+			isa = PBXGroup;
+			children = (
+				3D5DEA53249BA53F003EC103 /* AppDelegate.swift */,
+				3D5DEA55249BA53F003EC103 /* SceneDelegate.swift */,
+				3D5DEA59249BA53F003EC103 /* Main.storyboard */,
+				7323878D27580AB300EA8008 /* VC */,
+				7323878C2757FF3D00EA8008 /* View */,
+				7323878E275D650900EA8008 /* mp4 */,
+				736B713327443E7500D2C6C9 /* Utility */,
+				3D5DEA5C249BA543003EC103 /* Assets.xcassets */,
+				3D5DEA5E249BA543003EC103 /* LaunchScreen.storyboard */,
+				3D5DEA61249BA543003EC103 /* Info.plist */,
+			);
+			path = apexscores;
+			sourceTree = "<group>";
+		};
+		462F6EBB1BBB2C48BC4F6E9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF64087FE2947D2A71DFE3 /* Pods_apexscores.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7323878C2757FF3D00EA8008 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7323878427575DFB00EA8008 /* OverView.swift */,
+				7323878627575E1200EA8008 /* LegendsView.swift */,
+				732387DE2762171B00EA8008 /* LegendsHeaderView.swift */,
+				732387D1275F5ECA00EA8008 /* LegendsTableViewCell.swift */,
+				73607FCC276A1EA200FF832F /* SaveTextCollectionViewCell.swift */,
+				732387DD2762106800EA8008 /* Xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7323878D27580AB300EA8008 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				73267C312724BC4900434510 /* ScoreViewController.swift */,
+				73267C322724BC4900434510 /* TopViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		7323878E275D650900EA8008 /* mp4 */ = {
+			isa = PBXGroup;
+			children = (
+				7323878F275D665D00EA8008 /* apex0.mp4 */,
+				73607FBB276A1A1C00FF832F /* apex1.mp4 */,
+				73607FC1276A1A1D00FF832F /* apex2.mp4 */,
+				73607FBA276A1A1C00FF832F /* apex3.mp4 */,
+				73607FBC276A1A1C00FF832F /* apex4.mp4 */,
+				73607FC0276A1A1D00FF832F /* apex5.mp4 */,
+				73607FBD276A1A1D00FF832F /* apex6.mp4 */,
+				73607FBE276A1A1D00FF832F /* apex7.mp4 */,
+				73607FBF276A1A1D00FF832F /* apex8.mp4 */,
+				73607FC2276A1A1D00FF832F /* apex9.mp4 */,
+			);
+			path = mp4;
+			sourceTree = "<group>";
+		};
+		732387DD2762106800EA8008 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				7323878827575F9000EA8008 /* OverView.xib */,
+				7323878A27575FB900EA8008 /* LegendsView.xib */,
+				732387E02762173800EA8008 /* LegendsHeaderView.xib */,
+				732387CF275F5E9000EA8008 /* LegendsTableViewCell.xib */,
+				73607FCD276A1EA200FF832F /* SaveTextCollectionViewCell.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		736B713327443E7500D2C6C9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7332851D2733E7ED00C69DAF /* EnumPlatformSort.swift */,
+				732387D3275F6DE100EA8008 /* LegendsModel.swift */,
+				736B71382744435900D2C6C9 /* ScoreModel.swift */,
+				736B713427443E9100D2C6C9 /* ScoreAPI.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		8D021DCF2DEA5FEC7A67764D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B88474442AC12EDC971CCDD9 /* Pods-apexscores.debug.xcconfig */,
+				36A64B23172077FE49E342B5 /* Pods-apexscores.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D5DEA4F249BA53F003EC103 /* apexscores */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D5DEA64249BA543003EC103 /* Build configuration list for PBXNativeTarget "apexscores" */;
+			buildPhases = (
+				571A5ABD368D406BD474389C /* [CP] Check Pods Manifest.lock */,
+				3D5DEA4C249BA53F003EC103 /* Sources */,
+				3D5DEA4D249BA53F003EC103 /* Frameworks */,
+				3D5DEA4E249BA53F003EC103 /* Resources */,
+				38CDC65B53024757F0482820 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = apexscores;
+			productName = apexscores;
+			productReference = 3D5DEA50249BA53F003EC103 /* apexscores.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D5DEA48249BA53F003EC103 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1220;
+				ORGANIZATIONNAME = "とももり";
+				TargetAttributes = {
+					3D5DEA4F249BA53F003EC103 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 3D5DEA4B249BA53F003EC103 /* Build configuration list for PBXProject "apexscores" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3D5DEA47249BA53F003EC103;
+			productRefGroup = 3D5DEA51249BA53F003EC103 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3D5DEA4F249BA53F003EC103 /* apexscores */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D5DEA4E249BA53F003EC103 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73607FCA276A1A1D00FF832F /* apex2.mp4 in Resources */,
+				73607FCF276A1EA200FF832F /* SaveTextCollectionViewCell.xib in Resources */,
+				732387E12762173800EA8008 /* LegendsHeaderView.xib in Resources */,
+				7323878927575F9000EA8008 /* OverView.xib in Resources */,
+				7323878B27575FB900EA8008 /* LegendsView.xib in Resources */,
+				3D5DEA60249BA543003EC103 /* LaunchScreen.storyboard in Resources */,
+				73238790275D665D00EA8008 /* apex0.mp4 in Resources */,
+				73607FC4276A1A1D00FF832F /* apex1.mp4 in Resources */,
+				73607FC8276A1A1D00FF832F /* apex8.mp4 in Resources */,
+				3D5DEA5D249BA543003EC103 /* Assets.xcassets in Resources */,
+				73607FC3276A1A1D00FF832F /* apex3.mp4 in Resources */,
+				732387D0275F5E9100EA8008 /* LegendsTableViewCell.xib in Resources */,
+				73607FC9276A1A1D00FF832F /* apex5.mp4 in Resources */,
+				73607FCB276A1A1D00FF832F /* apex9.mp4 in Resources */,
+				73607FC5276A1A1D00FF832F /* apex4.mp4 in Resources */,
+				73607FC6276A1A1D00FF832F /* apex6.mp4 in Resources */,
+				3D5DEA5B249BA53F003EC103 /* Main.storyboard in Resources */,
+				73607FC7276A1A1D00FF832F /* apex7.mp4 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38CDC65B53024757F0482820 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-apexscores/Pods-apexscores-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-apexscores/Pods-apexscores-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-apexscores/Pods-apexscores-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		571A5ABD368D406BD474389C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-apexscores-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D5DEA4C249BA53F003EC103 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				736B71392744435900D2C6C9 /* ScoreModel.swift in Sources */,
+				7323878527575DFB00EA8008 /* OverView.swift in Sources */,
+				732387D4275F6DE100EA8008 /* LegendsModel.swift in Sources */,
+				73267C352724BC4900434510 /* TopViewController.swift in Sources */,
+				7332851E2733E7ED00C69DAF /* EnumPlatformSort.swift in Sources */,
+				3D5DEA54249BA53F003EC103 /* AppDelegate.swift in Sources */,
+				73267C342724BC4900434510 /* ScoreViewController.swift in Sources */,
+				732387D2275F5ECA00EA8008 /* LegendsTableViewCell.swift in Sources */,
+				732387DF2762171B00EA8008 /* LegendsHeaderView.swift in Sources */,
+				736B713527443E9100D2C6C9 /* ScoreAPI.swift in Sources */,
+				73607FCE276A1EA200FF832F /* SaveTextCollectionViewCell.swift in Sources */,
+				3D5DEA56249BA53F003EC103 /* SceneDelegate.swift in Sources */,
+				7323878727575E1200EA8008 /* LegendsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3D5DEA59249BA53F003EC103 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D5DEA5A249BA53F003EC103 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3D5DEA5E249BA543003EC103 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D5DEA5F249BA543003EC103 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3D5DEA62249BA543003EC103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3D5DEA63249BA543003EC103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D5DEA65249BA543003EC103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B88474442AC12EDC971CCDD9 /* Pods-apexscores.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
+				DEVELOPMENT_TEAM = PASN6C79TC;
+				INFOPLIST_FILE = apexscores/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.whispon.apexscores;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3D5DEA66249BA543003EC103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36A64B23172077FE49E342B5 /* Pods-apexscores.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
+				DEVELOPMENT_TEAM = PASN6C79TC;
+				INFOPLIST_FILE = apexscores/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.whispon.apexscores;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3D5DEA4B249BA53F003EC103 /* Build configuration list for PBXProject "apexscores" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5DEA62249BA543003EC103 /* Debug */,
+				3D5DEA63249BA543003EC103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D5DEA64249BA543003EC103 /* Build configuration list for PBXNativeTarget "apexscores" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5DEA65249BA543003EC103 /* Debug */,
+				3D5DEA66249BA543003EC103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3D5DEA48249BA53F003EC103 /* Project object */;
+}
